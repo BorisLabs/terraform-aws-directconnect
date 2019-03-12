@@ -10,7 +10,7 @@ resource "aws_dx_hosted_private_virtual_interface" "private_vif" {
 }
 
 resource "aws_dx_hosted_private_virtual_interface_accepter" "private_vif_accepter" {
-  provider             = "aws.owner"
+  provider             = "aws.accepter"
   virtual_interface_id = "${aws_dx_hosted_private_virtual_interface.private_vif.id}"
   vpn_gateway_id       = "${var.vgw_id}"
 }
