@@ -1,8 +1,10 @@
 variable "address_family" {
+  description = "The Address Family for the BGP Peer ipv4 or ipv6"
   default = "ipv4"
 }
 
 variable "vlan_prefix" {
+  description = "VLAN ID for Private interface"
   default = 1
 }
 
@@ -10,16 +12,84 @@ variable "aws_region" {
   default = "eu-west-1"
 }
 
-variable "bgp_asn" {}
+variable "create_dx_private_hosted_vif" {
+  description = "Create a DX Private Hosted Virtual Interface"
+  default = false
+}
 
-variable "amazonAddress" {}
+variable "create_private_hosted_vif" {
+  description = "Create a DX Private virtual Interface"
+  default = false
+}
 
-variable "name" {}
+variable "create_dx_gateway" {
+  description = "Create a DX gateway"
+  default = false
+}
 
-variable "vlan_id" {}
+variable "create_vgw" {
+  description = "Ability to create a VGW required for DX gateway"
+  default = false
+}
 
-variable "connection_id" {}
+variable "attach_vgw" {
+  description = "Ability to attach an already existing VGW as appose to create one."
+  default = false
+}
 
-variable "owner_account_id" {}
+variable "vgw_id" {
+  description = "AWS ID of the Virtual Private Gateway if attaching one use in conjunction with attach VGW"
+  default = ""
+}
 
-variable "vgw_id" {}
+variable "vpc_id" {
+  description = "Required if you are creating and attach DX & VGW"
+  default = ""
+}
+
+variable "vgw_tags" {
+  description = "Tags for VGW Resource"
+  default = {}
+
+  type = "map"
+}
+
+variable "bgp_asn" {
+  description = "BGP ASN for Client VIF"
+  default = ""
+}
+
+variable "amazon_address" {
+  description = "Optional IPV4 CIDR address to use to send traffic to AWS Amazon. Required for IPV4 BGP peers"
+  default = ""
+}
+
+variable "name" {
+  description = "Name of the Virtual Interface"
+  default = "this-is-a-default-name"
+}
+
+variable "vlan_id" {
+  description = "The VLAN ID to use on the interface"
+  default = "4094"
+}
+
+variable "connection_id" {
+  description = "ID Of the DX Connection to attach the VIF to"
+  default = ""
+}
+
+variable "owner_account_id" {
+  description = "Owner Account who will own the VIF. This maybe another account in AWS."
+  default = ""
+}
+
+variable "mtu" {
+  description = "MTU size for the interface supports 1500 or 9001 (Jumbo)"
+  default = "1500"
+}
+
+variable "gateway_name" {
+  description = "DX Gateway name"
+  default = ""
+}
