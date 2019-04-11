@@ -2,8 +2,8 @@ resource "aws_dx_connection" "this" {
   count = "${var.create_dx_connection ? 1 : 0}"
 
   bandwidth = "${var.connection_bandwith}"
-  location =  "${var.connection_location}"
-  name =      "${var.connection_name}"
+  location  = "${var.connection_location}"
+  name      = "${var.connection_name}"
 
   tags = "${var.connection_tags}"
 }
@@ -12,15 +12,15 @@ resource "aws_dx_connection_association" "this" {
   count = "${var.create_dx_lag && var.create_dx_connection? 1 : 0}"
 
   connection_id = "${element(aws_dx_connection.this.*.id, 0)}"
-  lag_id =        "${element(aws_dx_lag.this.*.id, 0)}"
+  lag_id        = "${element(aws_dx_lag.this.*.id, 0)}"
 }
 
 resource "aws_dx_lag" "this" {
   count = "${var.create_dx_lag ? 1 : 0}"
 
   connections_bandwidth = "${var.connection_bandwith}"
-  location =              "${var.connection_location}"
-  name =                  "${var.lag_name}"
+  location              = "${var.connection_location}"
+  name                  = "${var.lag_name}"
 
   tags = "${var.lag_tags}"
 }
