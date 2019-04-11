@@ -32,6 +32,33 @@ variable "create_vgw" {
   default = false
 }
 
+variable "create_dx_connection" {
+  description = "Create a DX Connection"
+  default = false
+}
+
+variable "connection_bandwith" {
+  description = "DX Connection Bandwidth 1Gbps or 10Gbps"
+  default = "1Gbps"
+}
+
+variable "connection_location" {
+  description = "AWS Direct connect location"
+  default = "EqLD5"
+}
+
+variable "connection_name" {
+  description = "Name of the DX Connection"
+  default = ""
+}
+
+variable "connection_tags" {
+  description = "Tags for DX Connection"
+  default = {}
+
+  type = "map"
+}
+
 variable "attach_vgw" {
   description = "Ability to attach an already existing VGW as appose to create one."
   default = false

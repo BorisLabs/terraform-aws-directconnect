@@ -1,3 +1,13 @@
+resource "aws_dx_connection" "this" {
+  count = "${var.create_dx_connection ? 1 : 0}"
+
+  bandwidth = "${var.connection_bandwith}"
+  location =  "${var.connection_location}"
+  name =      "${var.connection_name}"
+
+  tags = "${var.connection_tags}"
+}
+
 resource "aws_dx_hosted_private_virtual_interface" "private_vif" {
   count = "${var.create_dx_private_hosted_vif ? 1 : 0}"
 
@@ -42,7 +52,7 @@ resource "aws_dx_gateway_association" "this" {
   count = "${var.create_dx_gateway ? 1 : 0}"
 
   dx_gateway_id  =  "${aws_dx_gateway.this.*.id[0]}"
-  vpn_gateway_id = "${concat(element(aws_vpn_gateway.this.*.id, 0), list(var.vgw_id))}"
+  vpn_gateway_id = "${element(concat(element(aws_vpn_gateway.this.*.id, 0), list(var.vgw_id)), 0)}"
 }
 
 resource "aws_vpn_gateway" "this" {
