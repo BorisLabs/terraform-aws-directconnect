@@ -37,6 +37,23 @@ variable "create_dx_connection" {
   default = false
 }
 
+variable "create_dx_lag" {
+  description = "Creates a LAG Group"
+  default = false
+}
+
+variable "lag_name" {
+  description = "Name of the Lag group"
+  default = ""
+}
+
+variable "lag_tags" {
+  description = "Tags to associate with a Lag Group"
+  default = {}
+
+  type = "map"
+}
+
 variable "connection_bandwith" {
   description = "DX Connection Bandwidth 1Gbps or 10Gbps"
   default = "1Gbps"
@@ -94,6 +111,13 @@ variable "amazon_address" {
 variable "name" {
   description = "Name of the Virtual Interface"
   default = "this-is-a-default-name"
+}
+
+variable "private_vif_tags" {
+  description = "Tags to be applied to a Private VIF !!! Not Hosted Private VIF"
+  default = {}
+
+  type = "map"
 }
 
 variable "vlan_id" {
