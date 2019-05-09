@@ -23,7 +23,8 @@ module "should_create_single_vif" {
   owner_account_id = "${data.aws_caller_identity.accepter.account_id}"
   vgw_id           = "vgw-12345678abcdef"
   vlan_id          = "101"
-  providers        = {
+
+  providers = {
     aws.accepter = "aws.accepter-account"
     aws.source   = "aws.owner-account"
   }
