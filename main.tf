@@ -1,15 +1,15 @@
 resource "aws_dx_connection" "this" {
   count = "${var.create_dx_connection ? 1 : 0}"
 
-  bandwidth = "${var.connection_bandwith}"
-  location  = "${var.connection_location}"
-  name      = "${var.connection_name}"
+  name      = "${var.dx_connection_name}"
+  bandwidth = "${var.dx_connection_bandwith}"
+  location  = "${var.dx_connection_location}"
 
-  tags = "${var.connection_tags}"
+  tags = "${var.dx_connection_tags}"
 }
 
 resource "aws_dx_connection_association" "this" {
-  count = "${var.create_dx_lag && var.create_dx_connection? 1 : 0}"
+  count = "${var.create_dx_lag && var.create_dx_connection ? 1 : 0}"
 
   connection_id = "${element(aws_dx_connection.this.*.id, 0)}"
   lag_id        = "${element(aws_dx_lag.this.*.id, 0)}"
@@ -18,24 +18,26 @@ resource "aws_dx_connection_association" "this" {
 resource "aws_dx_lag" "this" {
   count = "${var.create_dx_lag ? 1 : 0}"
 
-  connections_bandwidth = "${var.connection_bandwith}"
-  location              = "${var.connection_location}"
-  name                  = "${var.lag_name}"
+  connections_bandwidth = "${var.dx_connection_bandwith}"
+  location              = "${var.dx_connection_location}"
+  name                  = "${var.dx_lag_name}"
 
-  tags = "${var.lag_tags}"
+  tags = "${var.dx_lag_tags}"
 }
 
 resource "aws_dx_hosted_private_virtual_interface" "private_vif" {
   count = "${var.create_dx_private_hosted_vif ? 1 : 0}"
 
-  address_family   = "${var.address_family}"
-  bgp_asn          = "${var.bgp_asn}"
-  connection_id    = "${var.connection_id}"
-  name             = "${var.name}"
-  owner_account_id = "${var.owner_account_id}"
-  vlan             = "${var.vlan_id}"
-  amazon_address   = "${var.amazon_address}"
-  mtu              = "${var.mtu}"
+  name          = "${var.dx_private_hosted_vif_name}"
+  connection_id = "${var.dx_connection_id}"
+
+  address_family   = "${var.dx_private_hosted_vif_address_family}"
+  bgp_asn          = "${var.dx_private_hosted_vif_bgp_asn}"
+  owner_account_id = "${var.dx_private_hosted_vif_owner_account_id}"
+  vlan             = "${var.dx_private_hosted_vif_vlan_id}"
+  customer_address = "${var.dx_private_hosted_vif_customer_address}"
+  amazon_address   = "${var.dx_private_hosted_vif_amazon_address}"
+  mtu              = "${var.mtu_size}"
 }
 
 resource "aws_dx_hosted_private_virtual_interface_accepter" "private_vif_accepter" {
@@ -47,31 +49,45 @@ resource "aws_dx_hosted_private_virtual_interface_accepter" "private_vif_accepte
 }
 
 resource "aws_dx_private_virtual_interface" "this" {
-  count = "${var.create_private_hosted_vif ? 1 : 0}"
+  count = "${var.create_dx_private_vif ? 1 : 0}"
 
-  address_family = "${var.address_family}"
-  bgp_asn        = "${var.bgp_asn}"
-  connection_id  = "${var.connection_id}"
-  name           = "${var.name}"
-  vlan           = "${var.vlan_id}"
-  amazon_address = "${var.amazon_address}"
-  mtu            = "${var.mtu}"
+  name          = "${var.dx_private_vif_name}"
+  connection_id = "${var.dx_connection_id}"
 
-  tags = "${var.private_vif_tags}"
+  address_family   = "${var.dx_private_vif_address_family}"
+  bgp_asn          = "${var.dx_private_vif_bgp_asn}"
+  vlan             = "${var.dx_private_vif_vlan_id}"
+  amazon_address   = "${var.dx_private_vif_amazon_address}"
+  customer_address = "${var.dx_private_vif_customer_address}"
+
+  mtu = "${var.mtu_size}"
+
+  dx_gateway_id = "${element(concat(aws_dx_gateway.this.*.id, data.aws_dx_gateway.this.*.id), 0)}"
+
+  tags = "${var.dx_private_vif_tags}"
 }
 
 resource "aws_dx_gateway" "this" {
   count = "${var.create_dx_gateway ? 1 : 0}"
 
-  amazon_side_asn = "${var.bgp_asn}"
-  name            = "${var.gateway_name}"
+  name            = "${var.dx_gateway_name}"
+  amazon_side_asn = "${var.dx_gateway_bgp_asn}"
 }
 
 resource "aws_dx_gateway_association" "this" {
-  count = "${var.create_dx_gateway ? 1 : 0}"
+  count = "${var.create_dx_gateway && var.associate_dx_gateway ? 1 : 0}"
 
-  dx_gateway_id  =  "${aws_dx_gateway.this.*.id[0]}"
+  dx_gateway_id  = "${aws_dx_gateway.this.*.id[0]}"
   vpn_gateway_id = "${element(concat(element(aws_vpn_gateway.this.*.id, 0), list(var.vgw_id)), 0)}"
+}
+
+resource "aws_dx_gateway_association_proposal" "this" {
+  count = "${var.create_dx_gateway && var.crossaccount_dx_gateway ? 1 : 0}"
+
+  dx_gateway_id  = "${aws_dx_gateway.this.id}"
+  vpn_gateway_id = "${var.vgw_id}"
+
+  dx_gateway_owner_account_id = "${aws_dx_gateway.this.owner_account_id}"
 }
 
 resource "aws_vpn_gateway" "this" {
