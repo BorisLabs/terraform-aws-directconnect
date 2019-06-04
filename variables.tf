@@ -145,7 +145,7 @@ variable "dx_private_vif_bgp_asn" {
   default     = "65000"
 }
 
-variable "dx_private_vifaddress_family" {
+variable "dx_private_vif_address_family" {
   description = "The Address Family for the BGP Peer ipv4 or ipv6"
   default     = "ipv4"
 }
