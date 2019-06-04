@@ -1,15 +1,15 @@
 # AWS Direct Connect Terraform Module
-Terraform module which creates [Direct Connect resources][https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html] on AWS.
+Terraform module which creates [Direct Connect resources](https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html) on AWS.
 
 The following resources are supported:
-- [DX Connection][https://www.terraform.io/docs/providers/aws/r/dx_connection.html]
-- [DX Connection Association][https://www.terraform.io/docs/providers/aws/r/dx_connection_association.html]
-- [DX Gateway][https://www.terraform.io/docs/providers/aws/r/dx_gateway.html]
-- [DX Gateway Association][https://www.terraform.io/docs/providers/aws/r/dx_gateway_association.html]
-- [DX Hosted Public Virtual Interface][https://www.terraform.io/docs/providers/aws/r/dx_hosted_public_virtual_interface.html]
-- [DX Hosted Public Virtual Interface Accepter][https://www.terraform.io/docs/providers/aws/r/dx_hosted_public_virtual_interface_accepter.html]
-- [DX Link Aggregation Group][https://www.terraform.io/docs/providers/aws/r/dx_lag.html]
-- [DX Private Virtual Interface][https://www.terraform.io/docs/providers/aws/r/dx_private_virtual_interface.html]
+- [DX Connection](https://www.terraform.io/docs/providers/aws/r/dx_connection.html)
+- [DX Connection Association](https://www.terraform.io/docs/providers/aws/r/dx_connection_association.html)
+- [DX Gateway](https://www.terraform.io/docs/providers/aws/r/dx_gateway.html)
+- [DX Gateway Association](https://www.terraform.io/docs/providers/aws/r/dx_gateway_association.html)
+- [DX Hosted Public Virtual Interface](https://www.terraform.io/docs/providers/aws/r/dx_hosted_public_virtual_interface.html)
+- [DX Hosted Public Virtual Interface Accepter](https://www.terraform.io/docs/providers/aws/r/dx_hosted_public_virtual_interface_accepter.html)
+- [DX Link Aggregation Group](https://www.terraform.io/docs/providers/aws/r/dx_lag.html)
+- [DX Private Virtual Interface](https://www.terraform.io/docs/providers/aws/r/dx_private_virtual_interface.html)
 
 This module aims to provide all connotations of Direct Connect setup for AWS.
 
@@ -43,20 +43,20 @@ module "gateway_and_attached_vif" {
 ```
 
 #Examples
-- [Single VIF][https://github.com/BorisLabs/terraform-aws-directconnect/tree/master/examples/single_vif]
-- [DX Connection][https://github.com/BorisLabs/terraform-aws-directconnect/tree/master/examples/dx_connection]
-- [VIF attached to pre-existing DX Gateway][https://github.com/BorisLabs/terraform-aws-directconnect/tree/master/examples/dx_gateway_and_private_vif]
-- [Complete Terragrunt for DX Conn, GW, VIF -- COMING SOON][]
+- [Single VIF](https://github.com/BorisLabs/terraform-aws-directconnect/tree/master/examples/single_vif)
+- [DX Connection](https://github.com/BorisLabs/terraform-aws-directconnect/tree/master/examples/dx_connection)
+- [VIF attached to pre-existing DX Gateway](https://github.com/BorisLabs/terraform-aws-directconnect/tree/master/examples/dx_gateway_and_private_vif)
+- [Complete Terragrunt for DX Conn, GW, VIF -- COMING SOON]()
 
 ##Terraform Versions
 This module currently only supports Terraform v0.11.
-Terraform 0.12 support is expected soon. Please follow [#3][https://github.com/BorisLabs/terraform-aws-directconnect/issues/3] for updates
+Terraform 0.12 support is expected soon. Please follow [#3](https://github.com/BorisLabs/terraform-aws-directconnect/issues/3) for update
 
 ##Authors
-Module managed by 
-[Rob Houghton][https://github.com/ALLFIVE]
-[Josh Sinfield][https://github.com/JoshiiSinfield]
-[Ben Arundel][https://github.com/barundel]
+Module managed by  
+[Rob Houghton](https://github.com/ALLFIVE)  
+[Josh Sinfield](https://github.com/JoshiiSinfield)  
+[Ben Arundel](https://github.com/barundel)
 
 ##Notes
 1. All Outputs are lists due to conditional creations of all resources.
