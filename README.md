@@ -13,7 +13,7 @@ The following resources are supported:
 
 This module aims to provide all connotations of Direct Connect setup for AWS.
 
-##Usage
+## Usage
 ```HCL
 module "gateway_and_attached_vif" {
   source  = "BorisLabs/directconnect/aws"
@@ -42,23 +42,23 @@ module "gateway_and_attached_vif" {
 }
 ```
 
-#Examples
+# Examples
 - [Single VIF](https://github.com/BorisLabs/terraform-aws-directconnect/tree/master/examples/single_vif)
 - [DX Connection](https://github.com/BorisLabs/terraform-aws-directconnect/tree/master/examples/dx_connection)
 - [VIF attached to pre-existing DX Gateway](https://github.com/BorisLabs/terraform-aws-directconnect/tree/master/examples/dx_gateway_and_private_vif)
 - [Complete Terragrunt for DX Conn, GW, VIF -- COMING SOON]()
 
-##Terraform Versions
+## Terraform Versions
 This module currently only supports Terraform v0.11.
 Terraform 0.12 support is expected soon. Please follow [#3](https://github.com/BorisLabs/terraform-aws-directconnect/issues/3) for update
 
-##Authors
+## Authors
 Module managed by  
 [Rob Houghton](https://github.com/ALLFIVE)  
 [Josh Sinfield](https://github.com/JoshiiSinfield)  
 [Ben Arundel](https://github.com/barundel)
 
-##Notes
+## Notes
 1. All Outputs are lists due to conditional creations of all resources.
    Only one of each resource is currently created therefore the following use of element should suffice.
    ```${element(module.gateway_and_attached_vif.dx_private_hosted_vif_id, 0)}```  
