@@ -78,15 +78,23 @@ resource "aws_dx_gateway_association" "this" {
 
   dx_gateway_id         = aws_dx_gateway.this[0].id
   associated_gateway_id = concat(aws_vpn_gateway.this.*.id[0], [var.vgw_id])[0]
+}
 
+resource "aws_dx_gateway_association" "cross_account" {
+  count = var.crossaccount_dx_gateway ? 1 : 0
+  provider = aws.accepter
+
+  dx_gateway_id = var.dx_gateway_id
+  proposal_id = aws_dx_gateway_association_proposal.this.*.id[0]
+  associated_gateway_owner_account_id = data.aws_caller_identity.this.account_id
 }
 
 resource "aws_dx_gateway_association_proposal" "this" {
-  count = var.create_dx_gateway && var.crossaccount_dx_gateway ? 1 : 0
+  count = var.crossaccount_dx_gateway ? 1 : 0
 
-  dx_gateway_id               = aws_dx_gateway.this[0].id
+  dx_gateway_id               = var.dx_gateway_id
   associated_gateway_id       = var.vgw_id
-  dx_gateway_owner_account_id = aws_dx_gateway.this[0].owner_account_id
+  dx_gateway_owner_account_id = var.dx_gateway_owner_account_id
 }
 
 resource "aws_vpn_gateway" "this" {

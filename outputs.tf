@@ -29,3 +29,7 @@ output "dx_gateway_id" {
 output "dx_gateway_name" {
   value = aws_dx_gateway.this[0].name
 }
+
+output "vgw_id" {
+  value = aws_vpn_gateway.this[0].id
+}

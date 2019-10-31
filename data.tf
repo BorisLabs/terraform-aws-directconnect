@@ -3,3 +3,4 @@ data "aws_dx_gateway" "this" {
   name  = var.dx_gateway_name
 }
 
+data "aws_caller_identity" "this" {}
