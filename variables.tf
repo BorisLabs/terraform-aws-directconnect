@@ -61,7 +61,7 @@ variable "dx_lag_tags" {
   description = "Tags to associate with a Lag Group"
   default     = {}
 
-  type = "map"
+  type = map(string)
 }
 
 variable "dx_connection_bandwith" {
@@ -83,7 +83,7 @@ variable "dx_connection_tags" {
   description = "Tags for DX Connection"
   default     = {}
 
-  type = "map"
+  type = map(string)
 }
 
 variable "attach_vgw" {
@@ -105,7 +105,7 @@ variable "vgw_tags" {
   description = "Tags for VGW Resource"
   default     = {}
 
-  type = "map"
+  type = map(string)
 }
 
 variable "dx_gateway_bgp_asn" {
@@ -132,7 +132,7 @@ variable "dx_private_vif_tags" {
   description = "Tags to be applied to a Private VIF !!! Not Hosted Private VIF"
   default     = {}
 
-  type = "map"
+  type = map(string)
 }
 
 variable "dx_private_vif_vlan_id" {

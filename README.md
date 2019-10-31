@@ -36,7 +36,7 @@ module "gateway_and_attached_vif" {
   dx_private_vif_vlan_id          = "200"
 
   dx_private_vif_tags = {
-    Gateway    = "${dx-gw-01}"
+    Gateway    = "dx-gw-01"
     Enviroment = "Development"
   }
 }
@@ -49,8 +49,8 @@ module "gateway_and_attached_vif" {
 - [Complete Terragrunt for DX Conn, GW, VIF -- COMING SOON]()
 
 ## Terraform Versions
-This module currently only supports Terraform v0.11.
-Terraform 0.12 support is expected soon. Please follow [#3](https://github.com/BorisLabs/terraform-aws-directconnect/issues/3) for update
+This module supports Terraform v0.12 starting at version v0.1.0.  
+For Terraform v0.11 support please use v0.0.2
 
 ## Authors
 Module managed by  
@@ -59,8 +59,3 @@ Module managed by
 [Ben Arundel](https://github.com/barundel)
 
 ## Notes
-1. All Outputs are lists due to conditional creations of all resources.
-   Only one of each resource is currently created therefore the following use of element should suffice.
-   ```${element(module.gateway_and_attached_vif.dx_private_hosted_vif_id, 0)}```  
-   Please check code confirm this is still true.
-   

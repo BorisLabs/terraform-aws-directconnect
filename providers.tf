@@ -1,9 +1,4 @@
 provider "aws" {
-  alias  = "source"
-  region = "${var.aws_region}"
+  alias = "accepter"
 }
 
-provider "aws" {
-  alias  = "accepter"
-  region = "${var.aws_region}"
-}
