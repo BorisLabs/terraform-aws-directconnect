@@ -199,3 +199,11 @@ variable "dx_gateway_name" {
   description = "DX Gateway name"
   default     = ""
 }
+
+variable "dx_gateway_owner_account_id" {
+  default = ""
+}
+
+variable "dx_gateway_id" {
+  default = ""
+}
