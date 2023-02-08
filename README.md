@@ -55,7 +55,7 @@ Module managed by
 
 The following requirements are needed by this module:
 
-- <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (>= 0.13)
+- <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (>= 0.14)
 
 ## Providers
 

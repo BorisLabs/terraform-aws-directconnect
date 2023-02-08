@@ -100,11 +100,6 @@ variable "dx_connection_bandwith" {
   description = "DX Connection Bandwidth depends on location if all speeds are available"
   default     = "1Gbps"
 
-  validation {
-    condition     = contains(["1Gbps", "2Gbps", "3Gbps", "4Gbps", "10Gbps", "20Gbps", "30Gpbs", "40Gbps", "100Gpbs"], var.dx_connection_bandwith)
-    error_message = "Supported bandwidth values are 1Gbps or 10Gbps"
-  }
-
   type = string
 }
 
@@ -302,6 +297,7 @@ variable "dx_public_vif_address_family" {
 variable "dx_public_vif_bgp_auth_key" {
   description = "Auth key for BGP Configuration"
   default     = null
+  sensitive   = true
 
   type = string
 }
