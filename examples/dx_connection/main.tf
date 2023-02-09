@@ -7,13 +7,18 @@ module "dx_connection" {
 
   create_dx_connection = true
 
-  connection_bandwith = "1Gbps"
-  connection_location = "EqLD5"
-  connection_name     = "test-connection"
+  dx_connection_bandwith = "1Gbps"
+  dx_connection_location = "EqLD5"
+  dx_connection_name     = "test-connection"
+  dx_connection_provider = "Colt"
 
-  connection_tags = {
+  dx_connection_tags = {
     Name  = "My-Test-Connection"
     Type  = "Primary"
     Label = "A"
+  }
+
+  providers = {
+    aws.accepter = aws
   }
 }
