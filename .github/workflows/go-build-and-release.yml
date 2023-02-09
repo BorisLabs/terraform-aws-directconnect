@@ -1,0 +1,24 @@
+name: Build and Release a Version
+on:
+  push:
+    branches:
+      - master
+
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v3.0.2
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v3.0.0
+        id: semantic
+        with:
+          branch: master
+          extra_plugins: |
+            @semantic-release/git
+            @semantic-release/changelog
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
