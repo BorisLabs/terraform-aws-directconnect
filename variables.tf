@@ -449,3 +449,10 @@ variable "dx_bgp_customer_address" {
 
   type = string
 }
+
+variable "allowed_prefixes" {
+  description = "List of allowed prefixes to advertise to the Direct Connect Gateway"
+  default     = null
+
+  type = set(string)
+}
