@@ -102,6 +102,8 @@ resource "aws_dx_gateway_association" "this" {
 
   dx_gateway_id         = aws_dx_gateway.this[0].id
   associated_gateway_id = concat(aws_vpn_gateway.this.*.id[0], [var.vgw_id])[0]
+
+  allowed_prefixes = var.allowed_prefixes
 }
 
 resource "aws_dx_gateway_association" "cross_account" {
@@ -111,6 +113,8 @@ resource "aws_dx_gateway_association" "cross_account" {
   dx_gateway_id                       = var.dx_gateway_id
   proposal_id                         = aws_dx_gateway_association_proposal.this.*.id[0]
   associated_gateway_owner_account_id = data.aws_caller_identity.this.account_id
+
+  allowed_prefixes = var.allowed_prefixes
 }
 
 resource "aws_dx_gateway_association_proposal" "this" {
