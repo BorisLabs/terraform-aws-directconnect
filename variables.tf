@@ -456,3 +456,55 @@ variable "allowed_prefixes" {
 
   type = set(string)
 }
+
+variable "create_dx_transit_vif" {
+  description = "Create a DX Transit Virtual Interface"
+  type        = bool
+  default     = false
+}
+
+variable "dx_transit_vif_tags" {
+  description = "Tags to apply to Transit Virtual Interface"
+  default     = {}
+  type        = map(string)
+}
+
+variable "dx_transit_vif_name" {
+  description = "Name of the Transit Virtual Interface"
+  type        = string
+  default     = "this-is-a-default-name"
+}
+
+variable "dx_transit_vif_address_family" {
+  description = "The Address Family for the BGP Peer ipv4 or ipv6"
+  default     = "ipv4"
+  type        = string
+
+  validation {
+    condition     = contains(["ipv4", "ipv6"], var.dx_transit_vif_address_family)
+    error_message = "Supported values are either ipv4 or ipv6"
+  }
+}
+
+variable "dx_transit_vif_bgp_asn" {
+  description = "BGP ASN for Client VIF"
+  default     = 65000
+  type        = number
+}
+
+variable "dx_transit_vif_vlan_id" {
+  description = 4094
+  type        = number
+}
+
+variable "dx_transit_vif_amazon_address" {
+  description = "Optional IPV4 CIDR address to use to send traffic to AWS Amazon. Required for IPV4 BGP peers"
+  default     = "169.254.254.253/30"
+  type        = string
+}
+
+variable "dx_transit_vif_customer_address" {
+  description = "Optional IPV4 CIDR Address to use for customer side of the DX VIF"
+  default     = "169.254.254.254/30"
+  type        = string
+}
