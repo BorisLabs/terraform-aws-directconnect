@@ -493,8 +493,10 @@ variable "dx_transit_vif_bgp_asn" {
 }
 
 variable "dx_transit_vif_vlan_id" {
-  description = 4094
+  description = "The VLAN ID to use on the virtual interface"
+  default  = 4094
   type        = number
+
 }
 
 variable "dx_transit_vif_amazon_address" {
