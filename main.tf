@@ -119,7 +119,7 @@ resource "aws_dx_gateway_association" "this" {
   count = var.associate_dx_gateway ? 1 : 0
 
   dx_gateway_id         = var.create_dx_gateway ? aws_dx_gateway.this[0].id : var.dx_gateway_id
-  associated_gateway_id = concat(aws_vpn_gateway.this.*.id[0], [var.vgw_id])[0]
+  associated_gateway_id = concat(aws_vpn_gateway.this.*.id, [var.vgw_id])[0]
 
   allowed_prefixes = var.allowed_prefixes
 }
